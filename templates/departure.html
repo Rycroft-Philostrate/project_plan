@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <main class="container mt-3">
+    <h1 class="display-5 mt-4">Летим из {{page.departures[departure]}}</h1>
+    <p class="mb-4">Найдено {{tours|length}} туров, от {{tours|map(attribute='price')|list|min}} до {{tours|map(attribute='price')|list|max}}  и от {{tours|map(attribute='nights')|list|min}} ночей до {{tours|map(attribute='nights')|list|max}} ночей</p>
+    <!-- CARDS -->
+    <div class="row mt-5">
+      {% for tour in tours %}
+        {% if tour.departure == departure %}
+      <div class="col-4">
+        <div class="card mb-4">
+          <img src="{{tour.picture}}" class="card-img-top img-fluid" alt="">
+          <div class="card-body">
+            <h2 class="h5 card-title">{{tour.title}}</h2>
+            <p class="card-text">{{tour.description}}</p>
+            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}
